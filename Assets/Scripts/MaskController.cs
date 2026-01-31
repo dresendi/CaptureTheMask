@@ -37,7 +37,6 @@ public class MaskController : MonoBehaviour
     public void Take(PlayerMaskHandler player)
     {
         currentOwner = player;
-        player.SetHasMask(true);
 
         col.enabled = false;
         sr.enabled = false;
@@ -47,7 +46,6 @@ public class MaskController : MonoBehaviour
     {
         if (currentOwner == null || respawnTilemap == null) return;
 
-        currentOwner.SetHasMask(false);
         currentOwner = null;
 
         Bounds bounds = respawnTilemap.localBounds;

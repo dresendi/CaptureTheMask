@@ -2,15 +2,35 @@ using UnityEngine;
 
 public class MaskPickup : MonoBehaviour
 {
+    private bool alreadyTaken = false;
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (MaskGameManager.Instance.MaskIsOwned) return;
+
+        if (alreadyTaken) return;
 
         PlayerMaskHandler player = other.GetComponent<PlayerMaskHandler>();
         if (player == null) return;
 
-        MaskGameManager.Instance.AssignMask(player);
+        if (MaskOwnershipManager.Instance == null)
+        {
+            Debug.LogError("[MASK PICKUP] No existe MaskOwnershipManager en la escena");
+            return;
+        }
 
-        Destroy(gameObject); // la máscara desaparece
+        if (MaskOwnershipManager.Instance.HasOwner)
+        {
+            Debug.Log("[MASK PICKUP] Ya hay dueño, no se puede recoger");
+            return;
+        }
+
+        alreadyTaken = true;
+
+        Debug.Log($"[MASK PICKUP] {player.name} recogió la máscara");
+
+        MaskOwnershipManager.Instance.AssignOwner(player);
+
+        Destroy(gameObject);
+
     }
 }

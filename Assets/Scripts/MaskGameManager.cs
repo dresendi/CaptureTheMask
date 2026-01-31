@@ -30,14 +30,13 @@ public class MaskGameManager : MonoBehaviour
     public void AssignMask(PlayerMaskHandler player)
     {
         currentOwner = player;
-        player.SetHasMask(true);
+
     }
 
     public void RemoveMask(PlayerMaskHandler player)
     {
         if (currentOwner != player) return;
 
-        player.SetHasMask(false);
         currentOwner = null;
     }
 

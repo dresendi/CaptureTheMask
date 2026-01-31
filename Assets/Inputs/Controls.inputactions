@@ -754,34 +754,6 @@
                     "isPartOfComposite": true
                 }
             ]
-        },
-        {
-            "name": "New action map",
-            "id": "120cd941-cf98-45db-8bca-eadc3b0a03d3",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "7988a38d-4ee2-4c0a-a26c-33fcc2dcde17",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "4665253e-222a-449d-860f-320b8e87ed31",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": [
