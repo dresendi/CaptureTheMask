@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private GatherInput input;
-    private bool gotMask = false;
 
     private void Awake()
     {
