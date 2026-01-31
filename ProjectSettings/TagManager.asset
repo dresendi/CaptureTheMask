@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Ground
-  - 
+  - GasLayer
   - 
   - 
   - 
@@ -45,13 +45,16 @@ TagManager:
     uniqueID: 1011724839
     locked: 0
   - name: Ground
+    uniqueID: 1773276697
+    locked: 0
+  - name: Gas
     uniqueID: 3028435347
     locked: 0
-  - name: Middleground
+  - name: Player
     uniqueID: 3599160945
     locked: 0
-  - name: Player
-    uniqueID: 3538442959
+  - name: UI
+    uniqueID: 426076167
     locked: 0
   m_RenderingLayers:
   - Default

@@ -10,7 +10,6 @@ public class GatherInput : MonoBehaviour
     {
         //Movement = context.ReadValue<Vector2>();
         Vector2 value = context.ReadValue<Vector2>();
-        Debug.Log($"{gameObject.name} Move: {value}");
         Movement = value;
     }
 }
