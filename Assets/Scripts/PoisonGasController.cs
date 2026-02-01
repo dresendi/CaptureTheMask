@@ -15,6 +15,9 @@ public class PoisonGasController : MonoBehaviour
     private float currentRadius = 1f;
     private float maxRadius;
     private float timer;
+    private CircleCollider2D gasCollider;
+
+
 
     void Awake()
     {
@@ -22,6 +25,10 @@ public class PoisonGasController : MonoBehaviour
 
         Bounds bounds = map.localBounds;
         maxRadius = Mathf.Max(bounds.size.x, bounds.size.y) * 0.75f;
+        gasCollider = GetComponent<CircleCollider2D>();
+        gasCollider.radius = 1f;
+        gasCollider.enabled = false;
+
     }
 
     public void ActivateGas(Vector3 startPos)
@@ -30,6 +37,8 @@ public class PoisonGasController : MonoBehaviour
         Debug.Log($"☣️ Activando gas en {startPos}");
         transform.position = startPos;
         gameObject.SetActive(true);
+
+        gasCollider.enabled = true;
         ps.Play();
     }
 
@@ -49,6 +58,8 @@ public class PoisonGasController : MonoBehaviour
 
             var shape = ps.shape;
             shape.radius = currentRadius;
+            gasCollider.radius = currentRadius;
+
 
             var emission = ps.emission;
             emission.rateOverTime = emission.rateOverTime.constant + emissionIncrease;
@@ -138,5 +149,30 @@ public class PoisonGasController : MonoBehaviour
 
         return best;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"☣️ Algo entró al gas: {other.name}");
+
+        PlayerMaskHandler player = other.GetComponent<PlayerMaskHandler>();
+        if (player == null)
+        {
+            Debug.Log("❌ No tiene PlayerMaskHandler");
+            return;
+        }
+
+        if (!player.HasMask)
+        {
+            Debug.Log($"☠️ {other.name} murió por gas");
+            GameController.Instance.PlayerLost(player);
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, currentRadius);
+    }
+
 
 }
