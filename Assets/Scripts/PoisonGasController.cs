@@ -214,6 +214,45 @@ public class PoisonGasController : MonoBehaviour
         return bounds.center;
     }
 
+    public Vector3 GetSpawnPointFromTilemapFarFromPlayers2(Transform p1, Transform p2)
+    {
+        Debug.Log("🧠 Buscando celdas válidas en spawnTilemap...");
+        List<Vector3> validSpawns = new List<Vector3>();
+
+        foreach (var pos in spawnTilemap.cellBounds.allPositionsWithin)
+        {
+            if (!spawnTilemap.HasTile(pos)) continue;
+
+            Vector3 worldPos = spawnTilemap.GetCellCenterWorld(pos);
+            validSpawns.Add(worldPos);
+        }
+
+        Debug.Log($"🧩 Celdas válidas encontradas: {validSpawns.Count}");
+
+        // 🚨 PRIMERO valida que haya celdas
+        if (validSpawns.Count == 0)
+        {
+            Debug.LogError("❌ No se encontraron celdas válidas para spawn de gas");
+            return Vector3.zero;
+        }
+
+        // 🎯 Luego busca la más lejana
+        Vector3 best = validSpawns[0];
+        float maxDist = 0f;
+
+        foreach (var p in validSpawns)
+        {
+            float d = Vector2.Distance(p, p1.position) + Vector2.Distance(p, p2.position);
+            if (d > maxDist)
+            {
+                maxDist = d;
+                best = p;
+            }
+        }
+
+        return best;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

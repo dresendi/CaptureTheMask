@@ -50,7 +50,7 @@ public class GameTimer : MonoBehaviour
             //gas.ActivateGas(spawn);
 
             Debug.Log("🔥 Intentando activar gas...");
-            Vector3 spawn = gas.GetSpawnPointInsideMapFarFromPlayers(player1, player2);
+            Vector3 spawn = gas.GetSpawnPointFromTilemapFarFromPlayers2(player1, player2);
             Debug.Log($"📍 Punto de spawn calculado: {spawn}");
             gas.ActivateGas(spawn);
 
