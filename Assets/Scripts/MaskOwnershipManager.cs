@@ -11,6 +11,9 @@ public class MaskOwnershipManager : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private PlayerMaskHandler currentOwner;
+    [Header("Mask FX")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip maskPickupSfx;
 
     private float lastStealTime;
 
@@ -32,6 +35,9 @@ public class MaskOwnershipManager : MonoBehaviour
         Debug.Log($"[OWNER CHANGE] {currentOwner?.name ?? "NINGUNO"} → {player.name}");
         currentOwner = player;
         lastStealTime = Time.time;
+
+        if (audioSource != null && maskPickupSfx != null)
+            audioSource.PlayOneShot(maskPickupSfx);
     }
 
     public bool CanSteal() => Time.time >= lastStealTime + stealCooldown;

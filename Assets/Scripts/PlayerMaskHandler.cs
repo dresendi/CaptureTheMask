@@ -6,6 +6,10 @@ public class PlayerMaskHandler : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerControler controller;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hitSfx;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +33,8 @@ public class PlayerMaskHandler : MonoBehaviour
         if (other == null) return;
 
         Debug.Log($"[COLLISION] {name} chocó con {other.name}");
+        if (audioSource != null && hitSfx != null)
+            audioSource.PlayOneShot(hitSfx);
 
         if (!HasMask && other.HasMask)
         {
