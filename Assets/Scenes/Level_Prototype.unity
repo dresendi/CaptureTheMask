@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 296909078}
   - component: {fileID: 296909079}
   m_Layer: 0
-  m_Name: PoisonGas
+  m_Name: PoisonGas_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5218,14 +5218,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296909073}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6577067f7fea4a24880648231a82168b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoisonGasController
   map: {fileID: 801760460}
   growRate: 0
-  emissionIncrease: 4
+  emissionIncrease: 5
   checkInterval: 1
   spawnTilemap: {fileID: 545846893}
 --- !u!58 &296909078
@@ -6652,11 +6652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33afe002e0491704fb7baed5339ba554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
-  startTime: 1
+  startTime: 5
   timerText: {fileID: 658293419}
   warningText: {fileID: 1507517298}
   warningDuration: 1
-  gas: {fileID: 296909077}
+  gas: {fileID: 1531025444}
   player1: {fileID: 1621731852}
   player2: {fileID: 718604661}
 --- !u!82 &668574532
@@ -9098,7 +9098,7 @@ GameObject:
   - component: {fileID: 1531025439}
   - component: {fileID: 1531025444}
   m_Layer: 0
-  m_Name: Gasv2
+  m_Name: PoisonGas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13998,9 +13998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoisonGasController
   map: {fileID: 1034241359}
-  growRate: 0
-  emissionIncrease: 4
-  checkInterval: 1
+  growRate: 15
+  emissionIncrease: 3
+  checkInterval: 10
   spawnTilemap: {fileID: 30613852}
 --- !u!1 &1621731847
 GameObject:

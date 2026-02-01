@@ -24,6 +24,7 @@ public class PlayerControler : MonoBehaviour
     private bool isStunned;
     private float stunEndTime;
     private int IdSpeed;
+    private int idHasMask ;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         IdSpeed = Animator.StringToHash("Speed");
+        idHasMask = Animator.StringToHash("hasMask");
     }
 
     public void ApplyStun(float duration)
@@ -101,7 +103,9 @@ public class PlayerControler : MonoBehaviour
         if (hasMaskNow != lastMaskState)
         {
             lastMaskState = hasMaskNow;
-            spriteRenderer.sprite = hasMaskNow ? maskedSprite : normalSprite;
+            animator.SetBool(idHasMask , hasMaskNow);
+            Debug.LogError("idHasMask : " + hasMaskNow);
+            //spriteRenderer.sprite = hasMaskNow ? maskedSprite : normalSprite;
         }
     }
 }
