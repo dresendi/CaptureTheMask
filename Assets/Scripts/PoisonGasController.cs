@@ -10,7 +10,8 @@ public class PoisonGasController : MonoBehaviour
     [SerializeField] private float checkInterval = 1f;
     [SerializeField] private Tilemap spawnTilemap;
 
-
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private float explosionDuration = 1.2f;
     private ParticleSystem ps;
     private float currentRadius = 1f;
     private float maxRadius;
@@ -36,11 +37,20 @@ public class PoisonGasController : MonoBehaviour
         Debug.Log("🎇 Play() llamado en ParticleSystem: " + GetComponent<ParticleSystem>().name);
 
         Debug.Log($"☣️ Activando gas en {startPos}");
+        
         transform.position = startPos;
         gameObject.SetActive(true);
 
         gasCollider.enabled = true;
         ps.Play();
+        
+            // 💥 Crear explosión en el MISMO lugar
+        GameObject explosion = Instantiate(explosionPrefab, startPos, Quaternion.identity);
+
+        // 🧨 Destruirla después de un tiempo
+        Destroy(explosion, explosionDuration);
+
+  
     }
 
     void Start()
