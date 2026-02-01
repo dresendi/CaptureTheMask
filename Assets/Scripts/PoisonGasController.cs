@@ -33,7 +33,8 @@ public class PoisonGasController : MonoBehaviour
 
     public void ActivateGas(Vector3 startPos)
     {
-        
+        Debug.Log("🎇 Play() llamado en ParticleSystem: " + GetComponent<ParticleSystem>().name);
+
         Debug.Log($"☣️ Activando gas en {startPos}");
         transform.position = startPos;
         gameObject.SetActive(true);
