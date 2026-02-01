@@ -146,6 +146,11 @@ public class PoisonGasController : MonoBehaviour
                 best = p;
             }
         }
+        if (validSpawns.Count == 0)
+        {
+            Debug.LogError("No se encontraron celdas válidas para spawn de gas");
+            return Vector3.zero; // o alguna posición segura
+        }
 
         return best;
     }
@@ -166,6 +171,46 @@ public class PoisonGasController : MonoBehaviour
             Debug.Log($"☠️ {other.name} murió por gas");
             GameController.Instance.PlayerLost(player);
         }
+    }
+
+    public Vector3 GetSpawnPointInsideMapFarFromPlayers(Transform p1, Transform p2)
+    {
+        GameObject mapObj = GameObject.Find("Map");
+        if (mapObj == null)
+        {
+            Debug.LogError("No se encontró el objeto 'Map' en la escena.");
+            return Vector3.zero;
+        }
+
+        SpriteRenderer mapRenderer = mapObj.GetComponent<SpriteRenderer>();
+        if (mapRenderer == null)
+        {
+            Debug.LogError("El objeto 'Map' no tiene SpriteRenderer.");
+            return Vector3.zero;
+        }
+
+        Bounds bounds = mapRenderer.bounds;
+
+        float minDistanceFromPlayers = 3.5f; // ajusta si quieres
+        int maxAttempts = 30;
+
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            float randomX = Random.Range(bounds.min.x, bounds.max.x);
+            float randomY = Random.Range(bounds.min.y, bounds.max.y);
+            Vector3 candidate = new Vector3(randomX, randomY, 0f);
+
+            float distToP1 = Vector2.Distance(candidate, p1.position);
+            float distToP2 = Vector2.Distance(candidate, p2.position);
+
+            if (distToP1 >= minDistanceFromPlayers && distToP2 >= minDistanceFromPlayers)
+            {
+                return candidate;
+            }
+        }
+
+        Debug.LogWarning("No se encontró punto lejano tras varios intentos, usando centro del mapa.");
+        return bounds.center;
     }
 
     void OnDrawGizmos()
