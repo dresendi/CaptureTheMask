@@ -9,6 +9,11 @@ public class PlayerMaskHandler : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hitSfx;
 
+    public void setPlayerDead()
+    {
+        PlayerControler pc = GetComponent<PlayerControler>();
+        pc.setIsDead(true);
+    }
 
     void Awake()
     {

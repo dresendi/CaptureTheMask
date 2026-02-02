@@ -25,6 +25,14 @@ public class PlayerControler : MonoBehaviour
     private float stunEndTime;
     private int IdSpeed;
     private int idHasMask ;
+    private int idIsDead ;
+    private bool isDead = false;
+
+    public void setIsDead(bool value)
+    {
+        isDead = value;
+        animator.SetBool(idIsDead, isDead);
+    }
 
     void Awake()
     {
@@ -40,6 +48,7 @@ public class PlayerControler : MonoBehaviour
     {
         IdSpeed = Animator.StringToHash("Speed");
         idHasMask = Animator.StringToHash("hasMask");
+        idIsDead = Animator.StringToHash("isDead");
     }
 
     public void ApplyStun(float duration)

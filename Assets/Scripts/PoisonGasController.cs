@@ -171,6 +171,7 @@ public class PoisonGasController : MonoBehaviour
         Debug.Log($"☣️ Algo entró al gas: {other.name}");
 
         PlayerMaskHandler player = other.GetComponent<PlayerMaskHandler>();
+        
         if (player == null)
         {
             Debug.Log("❌ No tiene PlayerMaskHandler");
@@ -180,6 +181,7 @@ public class PoisonGasController : MonoBehaviour
         if (!player.HasMask)
         {
             Debug.Log($"☠️ {other.name} murió por gas");
+            player.setPlayerDead();
             GameController.Instance.PlayerLost(player);
         }
     }
